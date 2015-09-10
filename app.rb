@@ -17,10 +17,6 @@ get '/saml/authentication_request' do
 end
 
 post '/saml/artifact' do
-  p '--------------'
-  puts params['SAMLResponse']
-  p '--------------'
-  puts params[:SAMLResponse]
   response          = OneLogin::RubySaml::Response.new(params[:SAMLResponse])
   response.settings = Models::Account.get_saml_settings
 
