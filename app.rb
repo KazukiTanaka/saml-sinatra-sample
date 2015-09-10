@@ -11,19 +11,17 @@ configure do
   set :static_cache_control, :no_store
 end
 
-before do
-  # retrieve multiple params as an array
-  @params = Rack::Utils.parse_query @env['rack.request.form_vars']
-end
-
 get '/saml/authentication_request' do
   request = OneLogin::RubySaml::Authrequest.new
   redirect request.create(Models::Account.get_saml_settings)
 end
 
 post '/saml/artifact' do
-  puts @params
-  response          = OneLogin::RubySaml::Response.new(@params[:SAMLResponse])
+  p '--------------'
+  puts params['SAMLResponse']
+  p '--------------'
+  puts params[:SAMLResponse]
+  response          = OneLogin::RubySaml::Response.new(params[:SAMLResponse])
   response.settings = Models::Account.get_saml_settings
 
   if response.is_valid?
