@@ -21,7 +21,7 @@ get '/saml/authentication_request' do
   redirect request.create(Models::Account.get_saml_settings)
 end
 
-get '/saml/artifact' do
+post '/saml/artifact' do
   response          = OneLogin::RubySaml::Response.new(@params)
   response.settings = Models::Account.get_saml_settings
 
