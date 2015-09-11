@@ -22,7 +22,7 @@ post '/saml/artifact' do
 
   if response.is_valid?
     # authorize_success
-    puts reesponse
+    puts response
     "Success! #{response.nameid}, #{response.attributes[:last_name]}"
   else
     'Error'
